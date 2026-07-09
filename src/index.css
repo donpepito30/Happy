@@ -1,0 +1,143 @@
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Plus Jakarta Sans", sans-serif;
+  --font-headline: "Bricolage Grotesque", sans-serif;
+  --font-body: "Plus Jakarta Sans", sans-serif;
+
+  /* Colores definidos por el usuario */
+  --color-primary: #008F4C;
+  --color-secondary: #8C2C8C;
+  --color-tertiary: #8C2C8C;
+  --color-accent: #8C2C8C;
+  --color-darkgreen: #006B39;
+  --color-bg-main: #FFFFFF;
+  --color-bg-light: #F8F8F8;
+  --color-border-neutral: #E0E0E0;
+  --color-text-main: #212121;
+  --color-text-sec: #424242;
+  --color-bg-gradient: radial-gradient(at 0% 0%, rgba(0, 143, 76, 0.25) 0%, transparent 50%),
+                       radial-gradient(at 100% 100%, rgba(140, 44, 140, 0.25) 0%, transparent 50%),
+                       linear-gradient(135deg, #a6e6c3 0%, #ffffff 50%, #f2bddb 100%);
+
+  /* Mapeo para compatibilidad con las clases existentes */
+  --color-surface-bright: var(--color-bg-main);
+  --color-on-surface: var(--color-text-main);
+  --color-on-error: #ffffff;
+  --color-background: var(--color-bg-main);
+  --color-surface-variant: var(--color-bg-light);
+  --color-on-tertiary-fixed-variant: var(--color-text-sec);
+  --color-on-secondary-fixed-variant: var(--color-secondary);
+  --color-on-tertiary: #ffffff;
+  --color-surface-container-lowest: #ffffff;
+  --color-surface-dim: var(--color-border-neutral);
+  --color-tertiary-container: var(--color-text-sec);
+  --color-on-primary-container: var(--color-bg-main);
+  --color-on-primary-fixed: var(--color-text-main);
+  --color-tertiary-fixed-dim: var(--color-border-neutral);
+  --color-on-secondary: #ffffff;
+  --color-on-error-container: #93000a;
+  --color-inverse-primary: var(--color-primary);
+  --color-surface-container: var(--color-bg-light);
+  --color-surface-tint: var(--color-primary);
+  --color-surface-container-high: var(--color-bg-light);
+  --color-on-primary-fixed-variant: var(--color-darkgreen);
+  --color-secondary-fixed-dim: var(--color-secondary);
+  --color-on-secondary-container: var(--color-secondary);
+  --color-on-background: var(--color-text-main);
+  --color-surface: var(--color-bg-main);
+  --color-primary-fixed: var(--color-primary);
+  --color-outline: var(--color-border-neutral);
+  --color-secondary-fixed: var(--color-secondary);
+  --color-primary-container: var(--color-darkgreen);
+  --color-outline-variant: var(--color-border-neutral);
+  --color-error: #ba1a1a;
+  --color-secondary-container: var(--color-secondary);
+  --color-inverse-on-surface: var(--color-bg-main);
+  --color-on-tertiary-fixed: var(--color-text-main);
+  --color-inverse-surface: var(--color-text-main);
+  --color-on-tertiary-container: #ffffff;
+  --color-error-container: #ffdad6;
+  --color-surface-container-low: var(--color-bg-light);
+  --color-surface-container-highest: var(--color-border-neutral);
+  --color-primary-fixed-dim: var(--color-primary);
+  --color-on-surface-variant: var(--color-text-sec);
+  --color-on-secondary-fixed: var(--color-text-main);
+}
+
+@utility scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.gradient-primary-secondary {
+  background: linear-gradient(135deg, #008F4C 0%, #8C2C8C 100%);
+}
+
+.gradient-accent-warm {
+  background: linear-gradient(135deg, #8C2C8C 0%, #008F4C 100%);
+}
+
+.line-accent {
+  height: 3px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, #008F4C 0%, transparent 100%);
+}
+
+.badge-premium {
+  position: relative;
+  padding: 0.5rem 1rem;
+  font-size: 0.75rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  background: linear-gradient(135deg, rgba(0, 143, 76, 0.1) 0%, rgba(140, 44, 140, 0.1) 100%);
+  border: 1px solid rgba(0, 143, 76, 0.3);
+  border-radius: 99px;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--color-bg-gradient);
+  background-attachment: fixed;
+  color: var(--color-text-main);
+}
+
+.bento-card {
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.320, 1);
+}
+.bento-card:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 20px 40px -8px rgba(0, 0, 0, 0.15);
+}
+
+input[type="text"],
+input[type="tel"],
+input[type="email"],
+input[type="date"],
+select {
+  transition: all 0.3s ease-out;
+  border: 1.5px solid #e5e7eb;
+}
+
+input[type="text"]:focus,
+input[type="tel"]:focus,
+input[type="email"]:focus,
+input[type="date"]:focus,
+select:focus {
+  outline: none;
+  border-color: #008F4C;
+  box-shadow: 0 0 0 3px rgba(0, 143, 76, 0.1);
+}
+
+input[type="text"]:focus-visible,
+input[type="tel"]:focus-visible,
+input[type="email"]:focus-visible,
+input[type="date"]:focus-visible {
+  outline: none;
+}
+

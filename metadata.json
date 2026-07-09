@@ -1,0 +1,6 @@
+{
+  "name": "Happy View Optics",
+  "description": "Happy View Optics offers high-quality BlueBlock glasses to protect your eyes from digital screen fatigue, featuring an interactive lens simulator, style browser, and customizable combo deal.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
