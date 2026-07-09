@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { 
   Eye, Sparkles, Shield, CheckCircle, 
   ArrowRight, Calendar, MapPin, Phone, User, Clock, Info,
-  AlertCircle, ChevronLeft, ChevronRight, Heart, ShieldAlert
+  AlertCircle, ChevronLeft, ChevronRight, Heart, ShieldAlert,
+  Search, X
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 
@@ -32,6 +33,22 @@ export default function App() {
     "https://i.ibb.co/Lz0nZYK1/FB-IMG-1783531744648.jpg",
     "https://i.ibb.co/CsvF4PpK/FB-IMG-1783531751730.jpg"
   ];
+
+  const galleryImages = [
+    "https://i.ibb.co/C5m0mJfm/FB-IMG-1783531754702.jpg",
+    "https://i.ibb.co/3mqWP5JL/FB-IMG-1783536930233.jpg",
+    "https://i.ibb.co/spkR8s8m/FB-IMG-1783536933708.jpg",
+    "https://i.ibb.co/d0H4kbjY/FB-IMG-1783536926647.jpg",
+    "https://i.ibb.co/0ySPMLZL/FB-IMG-1783536924569.jpg",
+    "https://i.ibb.co/0yGQRNBP/FB-IMG-1783536919839.jpg",
+    "https://i.ibb.co/xS4S9ydc/FB-IMG-1783536917865.jpg",
+    "https://i.ibb.co/zV6CCh04/FB-IMG-1783536916044.jpg",
+    "https://i.ibb.co/Q3r6ChhP/FB-IMG-1783536914152.jpg",
+    "https://i.ibb.co/tMdn7t5n/FB-IMG-1783536907961.jpg",
+    "https://i.ibb.co/cXgC9YrC/FB-IMG-1783536890348.jpg"
+  ];
+
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
   React.useEffect(() => {
     const timer = setInterval(() => {
@@ -257,93 +274,149 @@ export default function App() {
         </section>
 
 
+        {/* 📸 GALERÍA DE PROMOCIONES (DEBAJO DEL HERO) */}
+        <section className="py-12 bg-white overflow-hidden">
+          <div className="max-w-6xl mx-auto px-6 md:px-12 lg:px-16 mb-8">
+            <div className="text-center">
+              <h2 className="font-headline text-2xl md:text-3xl font-extrabold text-text-main tracking-tight uppercase">
+                Descubre nuestras Promociones
+              </h2>
+              <div className="w-12 h-1 bg-primary rounded-full mt-2 mx-auto" />
+            </div>
+          </div>
+          
+          <div className="flex gap-4 overflow-x-auto pb-8 snap-x snap-mandatory scrollbar-hide px-6 md:px-12 lg:px-16">
+            {galleryImages.map((img, idx) => (
+              <motion.div 
+                key={idx}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: idx * 0.05 }}
+                whileHover={{ y: -5 }}
+                onClick={() => setSelectedImage(img)}
+                className="min-w-[280px] sm:min-w-[400px] h-[350px] sm:h-[450px] rounded-2xl overflow-hidden bg-stone-50 border border-border-neutral/20 shadow-md snap-center shrink-0 flex items-center justify-center p-2 relative group cursor-zoom-in"
+              >
+                <img 
+                  src={img} 
+                  alt={`Promoción ${idx + 1}`}
+                  className="w-full h-full object-contain transition-transform duration-700 group-hover:scale-110"
+                  referrerPolicy="no-referrer"
+                />
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors duration-300 pointer-events-none" />
+                <div className="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity bg-white/90 p-2 rounded-full shadow-sm">
+                  <Search className="w-5 h-5 text-primary" />
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </section>
+
+        {/* 🖼️ IMAGE MODAL (LIGHTBOX) */}
+        <AnimatePresence>
+          {selectedImage && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setSelectedImage(null)}
+              className="fixed inset-0 z-[100] bg-black/90 backdrop-blur-sm flex items-center justify-center p-4 md:p-12 cursor-zoom-out"
+            >
+              <motion.div
+                initial={{ scale: 0.9, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                exit={{ scale: 0.9, opacity: 0 }}
+                transition={{ type: "spring", damping: 25, stiffness: 300 }}
+                className="relative max-w-5xl w-full h-full flex items-center justify-center"
+              >
+                <img 
+                  src={selectedImage} 
+                  alt="Expanded view" 
+                  className="max-w-full max-h-full object-contain rounded-lg shadow-2xl"
+                  referrerPolicy="no-referrer"
+                />
+                <button 
+                  onClick={() => setSelectedImage(null)}
+                  className="absolute top-0 right-0 m-4 p-2 bg-white/10 hover:bg-white/20 text-white rounded-full transition-colors"
+                >
+                  <X className="w-6 h-6" />
+                </button>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+
         {/* 📦 2. SECCIÓN INFORMATIVA: LENTES BIFOCALES */}
         <section id="protection" className="py-24 bg-transparent border-b border-border-neutral/10 scroll-mt-20">
           <div className="max-w-6xl mx-auto px-6 md:px-12 lg:px-16">
             
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+            <div className="flex flex-col items-center text-center">
               
-              {/* Left Column - Image Container with absolute zero crop and safe margins */}
-              <motion.div 
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.6 }}
-                className="lg:col-span-6 flex justify-center w-full"
-              >
-                <div className="w-full max-w-lg bg-white/40 backdrop-blur-md p-5 rounded-[2rem] border border-border-neutral/40 shadow-sm flex items-center justify-center">
-                  <div className="w-full aspect-[4/3] rounded-2xl overflow-hidden bg-stone-100/50 flex items-center justify-center">
-                    <img 
-                      src="https://i.ibb.co/C5m0mJfm/FB-IMG-1783531754702.jpg" 
-                      alt="Lentes Bifocales Happy View" 
-                      className="w-full h-full object-contain filter brightness-105 drop-shadow-[0_8px_16px_rgba(0,0,0,0.12)] hover:scale-102 transition-transform duration-500"
-                      referrerPolicy="no-referrer"
-                    />
-                  </div>
-                </div>
-              </motion.div>
+
 
               {/* Right Column - Structured Texts */}
-              <div className="lg:col-span-6 flex flex-col justify-center">
+              <div className="max-w-3xl flex flex-col justify-center items-center">
 
                 
-                <h2 className="font-headline text-3xl md:text-4xl lg:text-5xl font-extrabold text-text-main tracking-tight mb-6">
+                <h2 className="font-headline text-3xl md:text-4xl lg:text-5xl font-extrabold text-text-main tracking-tight mb-6 text-pretty">
                   LENTES BIFOCALES
                 </h2>
                 
-                <p className="text-sm text-text-sec font-medium leading-relaxed mb-8">
-                  Diseñadas específicamente para brindar el máximo confort a quienes sufren de fatiga de acomodación. Estas lentes dividen sus zonas ópticas para simplificar tu rutina diaria.
+                <p className="text-sm md:text-base text-text-sec font-medium leading-relaxed mb-8 max-w-2xl text-pretty">
+                  Diseñadas específicamente para brindar el máximo confort a quienes sufren de fatiga de acomodación. Estas lentes dividen sus zonas ópticas para simplificar tu rutina diaria con una precisión visual inigualable.
                 </p>
 
                 {/* Details bullet points */}
-                <ul className="flex flex-col gap-4">
+                <ul className="grid grid-cols-1 sm:grid-cols-3 gap-6 mt-8">
                   <motion.li 
-                    initial={{ opacity: 0, x: 20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.4 }}
-                    className="flex items-start gap-3 p-4 rounded-xl bg-white/60 backdrop-blur-sm border border-border-neutral/30 shadow-2xs hover:shadow-xs transition-shadow"
+                    whileHover={{ y: -5, backgroundColor: "rgba(255, 255, 255, 0.9)" }}
+                    className="flex flex-col items-center text-center gap-4 p-6 rounded-2xl bg-white/60 backdrop-blur-sm border border-border-neutral/30 shadow-2xs hover:shadow-sm transition-all cursor-default"
                   >
-                    <div className="w-6 h-6 rounded-full bg-primary/10 text-primary flex items-center justify-center shrink-0 mt-0.5">
-                      <CheckCircle className="w-4 h-4" />
+                    <div className="w-10 h-10 rounded-full bg-primary/10 text-primary flex items-center justify-center shrink-0">
+                      <CheckCircle className="w-6 h-6" />
                     </div>
                     <div>
-                      <h4 className="font-bold text-sm text-text-main uppercase tracking-wide">Dos graduaciones</h4>
-                      <p className="text-xs text-text-sec mt-0.5">Una zona para visión cercana y otra zona superior para visión lejana.</p>
+                      <h4 className="font-bold text-sm text-text-main uppercase tracking-wide mb-2">Dos graduaciones</h4>
+                      <p className="text-xs text-text-sec leading-relaxed text-pretty">Una zona para visión cercana y otra zona superior para visión lejana.</p>
                     </div>
                   </motion.li>
 
                   <motion.li 
-                    initial={{ opacity: 0, x: 20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.4, delay: 0.1 }}
-                    whileHover={{ x: 5, backgroundColor: "rgba(255, 255, 255, 0.9)" }}
-                    className="flex items-start gap-3 p-4 rounded-xl bg-white/60 backdrop-blur-sm border border-border-neutral/30 shadow-2xs hover:shadow-sm transition-all cursor-default"
+                    whileHover={{ y: -5, backgroundColor: "rgba(255, 255, 255, 0.9)" }}
+                    className="flex flex-col items-center text-center gap-4 p-6 rounded-2xl bg-white/60 backdrop-blur-sm border border-border-neutral/30 shadow-2xs hover:shadow-sm transition-all cursor-default"
                   >
-                    <div className="w-6 h-6 rounded-full bg-primary/10 text-primary flex items-center justify-center shrink-0 mt-0.5">
-                      <CheckCircle className="w-4 h-4" />
+                    <div className="w-10 h-10 rounded-full bg-primary/10 text-primary flex items-center justify-center shrink-0">
+                      <CheckCircle className="w-6 h-6" />
                     </div>
                     <div>
-                      <h4 className="font-bold text-sm text-text-main uppercase tracking-wide">Línea visible integrada</h4>
-                      <p className="text-xs text-text-sec mt-0.5">Delimitación física nítida que separa ambas zonas de enfoque para evitar saltos de imagen.</p>
+                      <h4 className="font-bold text-sm text-text-main uppercase tracking-wide mb-2">Línea visible integrada</h4>
+                      <p className="text-xs text-text-sec leading-relaxed text-pretty">Delimitación física nítida que separa ambas zonas de enfoque para evitar saltos de imagen.</p>
                     </div>
                   </motion.li>
 
                   <motion.li 
-                    initial={{ opacity: 0, x: 20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.4, delay: 0.2 }}
-                    whileHover={{ x: 5, backgroundColor: "rgba(255, 255, 255, 0.9)" }}
-                    className="flex items-start gap-3 p-4 rounded-xl bg-white/60 backdrop-blur-sm border border-border-neutral/30 shadow-2xs hover:shadow-sm transition-all cursor-default"
+                    whileHover={{ y: -5, backgroundColor: "rgba(255, 255, 255, 0.9)" }}
+                    className="flex flex-col items-center text-center gap-4 p-6 rounded-2xl bg-white/60 backdrop-blur-sm border border-border-neutral/30 shadow-2xs hover:shadow-sm transition-all cursor-default"
                   >
-                    <div className="w-6 h-6 rounded-full bg-primary/10 text-primary flex items-center justify-center shrink-0 mt-0.5">
-                      <CheckCircle className="w-4 h-4" />
+                    <div className="w-10 h-10 rounded-full bg-primary/10 text-primary flex items-center justify-center shrink-0">
+                      <CheckCircle className="w-6 h-6" />
                     </div>
                     <div>
-                      <h4 className="font-bold text-sm text-text-main uppercase tracking-wide">Ideal para personas con presbicia</h4>
-                      <p className="text-xs text-text-sec mt-0.5">La solución más confortable para quienes necesitan corregir tanto la lectura manual como la distancia.</p>
+                      <h4 className="font-bold text-sm text-text-main uppercase tracking-wide mb-2">Ideal para personas con presbicia</h4>
+                      <p className="text-xs text-text-sec leading-relaxed text-pretty">La solución más confortable para quienes necesitan corregir tanto la lectura manual como la distancia.</p>
                     </div>
                   </motion.li>
                 </ul>
@@ -463,12 +536,12 @@ export default function App() {
             {/* Header Title & Slogan */}
             <div className="text-center max-w-2xl mx-auto mb-16 flex flex-col items-center">
 
-              <h2 className="font-headline text-3xl md:text-4.5xl font-extrabold text-text-main tracking-tight uppercase">
+              <h2 className="font-headline text-3xl md:text-4.5xl font-extrabold text-text-main tracking-tight uppercase text-pretty">
                 PROTEGE TU VISTA DE LA LUZ AZUL
               </h2>
-              <div className="w-20 h-1.5 bg-gradient-primary-secondary rounded-full mt-4 mb-4 shadow-lg shadow-primary/20" />
-              <p className="text-xs text-text-sec leading-relaxed font-semibold">
-                La sobreexposición a las pantallas LED de ordenadores, televisores y teléfonos inteligentes provoca fatiga y afecta tu reloj biológico. Incorporar un filtro azul es vital hoy en día.
+              <div className="w-20 h-1.5 bg-gradient-primary-secondary rounded-full mt-4 mb-6 shadow-lg shadow-primary/20" />
+              <p className="text-sm md:text-base text-text-sec leading-relaxed font-medium text-pretty">
+                La sobreexposición a las pantallas LED de dispositivos digitales provoca fatiga visual y altera tu ciclo de sueño. Incorporar un filtro azul es una medida vital en la era digital actual.
               </p>
             </div>
 
@@ -631,12 +704,12 @@ export default function App() {
             {/* Upper Promo Banner info */}
             <div className="flex flex-col items-center text-center max-w-3xl mx-auto mb-16">
 
-              <h2 className="font-headline text-3xl sm:text-4xl md:text-5xl font-black tracking-tight leading-none text-white uppercase">
+              <h2 className="font-headline text-3xl sm:text-4xl md:text-5xl font-black tracking-tight leading-tight text-white uppercase text-pretty">
                 MEGA PROMO 2X1 EN LENTES MONOFOCALES
               </h2>
-              <div className="w-16 h-1 bg-secondary rounded-full mt-4 mb-4" />
-              <p className="text-xs text-stone-300 font-medium">
-                Paga un solo par y llévate el segundo par de gafas completamente gratis. Selecciona cualquiera de las opciones tecnológicas detalladas a continuación y reserva tu combo.
+              <div className="w-16 h-1 bg-secondary rounded-full mt-4 mb-6" />
+              <p className="text-sm md:text-base text-stone-300 font-medium leading-relaxed text-pretty">
+                Paga un solo par y llévate el segundo completamente gratis. Selecciona cualquiera de las opciones tecnológicas detalladas a continuación y reserva tu combo exclusivo hoy mismo.
               </p>
             </div>
 
@@ -882,18 +955,17 @@ export default function App() {
         <section className="py-24 bg-transparent border-b border-border-neutral/10">
           <div className="max-w-6xl mx-auto px-6 md:px-12 lg:px-16">
             
-            <div className="text-center max-w-xl mx-auto mb-16 flex flex-col items-center">
-
-              <h2 className="font-headline text-3xl md:text-4.5xl font-extrabold text-text-main tracking-tight uppercase">
+            <div className="text-center max-w-2xl mx-auto mb-16 flex flex-col items-center">
+              <h2 className="font-headline text-3xl md:text-4.5xl font-extrabold text-text-main tracking-tight uppercase text-pretty">
                 GALERÍA DE PRODUCTOS
               </h2>
-              <div className="w-16 h-1 bg-primary rounded-full mt-4 mb-4" />
-              <p className="text-xs text-text-sec leading-relaxed font-semibold">
-                Nuestras monturas reales combinan la máxima calidad y ligereza. Encuentra el estilo que mejor se adapta a tus rasgos.
+              <div className="w-16 h-1 bg-primary rounded-full mt-4 mb-6" />
+              <p className="text-sm md:text-base text-text-sec leading-relaxed font-medium text-pretty">
+                Nuestras monturas reales combinan la máxima calidad y ligereza. Encuentra el estilo que mejor se adapta a tus rasgos con diseños que definen tu personalidad única.
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="flex justify-center">
               
               {/* 📦 6. GALERÍA DE PRODUCTOS: MODELO "GIRLY" */}
               <motion.div 
@@ -902,7 +974,7 @@ export default function App() {
                 viewport={{ once: true, margin: "-100px" }}
                 transition={{ duration: 0.6 }}
                 whileHover={{ y: -6, boxShadow: "0 20px 25px -5px rgba(0,0,0,0.05), 0 10px 10px -5px rgba(0,0,0,0.03)" }}
-                className="group bg-white/60 backdrop-blur-md rounded-[2.5rem] border border-border-neutral/40 overflow-hidden shadow-sm hover:shadow-md transition-all flex flex-col justify-between"
+                className="group bg-white/60 backdrop-blur-md rounded-[2.5rem] border border-border-neutral/40 overflow-hidden shadow-sm hover:shadow-md transition-all flex flex-col justify-between max-w-md"
               >
                 
                 {/* Product image - dynamic height, full visibility */}
@@ -919,20 +991,20 @@ export default function App() {
                 </div>
 
                 {/* Details info */}
-                <div className="p-8 pt-4">
-                  <div className="flex justify-between items-start mb-2">
-                    <h3 className="font-headline font-black text-2xl text-text-main uppercase tracking-wide">
+                <div className="p-8 pt-4 flex flex-col items-center text-center">
+                  <div className="mb-2">
+                    <h3 className="font-headline font-black text-2xl text-text-main uppercase tracking-wide text-pretty">
                       DPC ARMAZÓN
                     </h3>
 
                   </div>
                   
                   {/* Slogan */}
-                  <p className="text-sm font-bold text-secondary italic mb-4">
+                  <p className="text-sm font-bold text-secondary italic mb-4 uppercase tracking-wider">
                     EXPRESA TU PERSONALIDAD
                   </p>
                   
-                  <p className="text-xs text-text-sec leading-relaxed mb-6 font-medium">
+                  <p className="text-xs md:text-sm text-text-sec leading-relaxed mb-6 font-medium text-pretty">
                     Montura fina con acabados rosáceos y formas curvas sutiles que aportan dinamismo e iluminan tus facciones con total delicadeza y distinción.
                   </p>
 
@@ -942,61 +1014,6 @@ export default function App() {
                     whileTap={{ scale: 0.98 }}
                     transition={{ type: "spring", stiffness: 400, damping: 15 }}
                     className="w-full text-center bg-white/40 backdrop-blur-sm border border-border-neutral/60 hover:border-secondary hover:text-secondary text-text-main font-bold text-xs uppercase tracking-widest py-3.5 rounded-full transition-colors cursor-pointer"
-                  >
-                    Ver detalles del armazón
-                  </motion.button>
-                </div>
-
-              </motion.div>
-
-
-              {/* 📦 7. GALERÍA DE PRODUCTOS: MODELO "EXPLORER" */}
-              <motion.div 
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.6, delay: 0.15 }}
-                whileHover={{ y: -6, boxShadow: "0 20px 25px -5px rgba(0,0,0,0.05), 0 10px 10px -5px rgba(0,0,0,0.03)" }}
-                className="group bg-white/60 backdrop-blur-md rounded-[2.5rem] border border-border-neutral/40 overflow-hidden shadow-sm hover:shadow-md transition-all flex flex-col justify-between"
-              >
-                
-                {/* Product image - dynamic height, full visibility */}
-                <div className="w-full">
-                  <div className="w-full bg-slate-50/50 border-b border-border-neutral/20 flex items-center justify-center relative">
-                    <img 
-                      src="https://i.ibb.co/CsvF4PpK/FB-IMG-1783531751730.jpg" 
-                      alt="New Explorer Glasses" 
-                      className="w-full h-auto object-contain filter brightness-105 transition-transform duration-700 group-hover:scale-103"
-                      referrerPolicy="no-referrer"
-                    />
-
-                  </div>
-                </div>
-
-                {/* Details info */}
-                <div className="p-8 pt-4">
-                  <div className="flex justify-between items-start mb-2">
-                    <h3 className="font-headline font-black text-2xl text-text-main uppercase tracking-wide">
-                      NEW EXPLORER GLASSES
-                    </h3>
-
-                  </div>
-                  
-                  {/* Slogan */}
-                  <p className="text-sm font-bold text-primary uppercase tracking-wider mb-4">
-                    UN ESTILO FUERTE, ELEGANTE Y SIN LÍMITES
-                  </p>
-                  
-                  <p className="text-xs text-text-sec leading-relaxed mb-6 font-medium">
-                    Líneas geométricas puras esculpidas con patillas reforzadas. El balance idóneo entre sobriedad estructural e innovación ergonómica para tu día a día.
-                  </p>
-
-                  <motion.button 
-                    onClick={() => scrollToSection('combo-builder')}
-                    whileHover={{ scale: 1.03, boxShadow: "0 8px 20px -6px rgba(0, 143, 76, 0.25)" }}
-                    whileTap={{ scale: 0.98 }}
-                    transition={{ type: "spring", stiffness: 400, damping: 15 }}
-                    className="w-full text-center bg-white/40 backdrop-blur-sm border border-border-neutral/60 hover:border-primary hover:text-primary text-text-main font-bold text-xs uppercase tracking-widest py-3.5 rounded-full transition-colors cursor-pointer"
                   >
                     Ver detalles del armazón
                   </motion.button>
@@ -1082,11 +1099,11 @@ export default function App() {
                 </div>
                 
                 {/* Message in full uppercase exactly as provided */}
-                <h3 className="font-headline text-xl sm:text-2xl md:text-3xl font-black text-text-main tracking-tight leading-tight uppercase mb-6">
+                <h3 className="font-headline text-xl sm:text-2xl md:text-3xl font-black text-text-main tracking-tight leading-tight uppercase mb-6 text-pretty">
                   EL 80% DE LOS CASOS DE CEGUERA SON PREVENIBLES SI REALIZAS UN EXAMEN VISUAL PARA UNA DETECCIÓN TEMPRANA.
                 </h3>
                 
-                <p className="text-xs text-text-sec leading-relaxed max-w-xl mb-8 font-semibold">
+                <p className="text-sm md:text-base text-text-sec leading-relaxed max-w-xl mb-8 font-semibold text-pretty">
                   Afecciones silenciosas como el glaucoma, astigmatismo avanzado o el desgaste macular no presentan síntomas notables en fases iniciales. Una valoración anual a tiempo salva tu visión.
                 </p>
 
@@ -1163,13 +1180,13 @@ export default function App() {
               >
 
                 
-                <h2 className="font-headline text-3xl sm:text-4xl font-extrabold text-text-main tracking-tight uppercase mb-4">
+                <h2 className="font-headline text-3xl sm:text-4xl lg:text-5xl font-extrabold text-text-main tracking-tight uppercase mb-4 text-pretty">
                   VISÍTANOS Y REALIZA TU EXAMEN VISUAL
                 </h2>
                 
                 {/* Informative text provided exactly */}
-                <p className="text-xs sm:text-sm text-text-sec font-semibold leading-relaxed mb-8">
-                  Un examen visual puede detectar problemas como glaucoma, miopía o cataratas a tiempo. Reserva tu turno de forma rápida, cómoda y sin esperas.
+                <p className="text-sm md:text-base text-text-sec font-medium leading-relaxed mb-8 text-pretty">
+                  Un examen visual puede detectar problemas como glaucoma, miopía o cataratas a tiempo. Reserva tu turno de forma rápida, cómoda y sin esperas en nuestro centro especializado.
                 </p>
 
                 {bookingSuccess ? (
