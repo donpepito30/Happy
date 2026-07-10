@@ -206,8 +206,9 @@ export default function App() {
                 <img
                   src={carouselImages[currentSlide]}
                   alt={`Happy View Optics Banner ${currentSlide + 1}`}
-                  className="w-full h-full object-cover object-top saturate-[1.04] contrast-[1.03] brightness-100"
+                  className="w-full h-full object-cover object-top saturate-[1.04] contrast-[1.03] brightness-100 cursor-zoom-in"
                   style={{ imageRendering: 'auto' }}
+                  onClick={() => setSelectedImage(carouselImages[currentSlide])}
                   referrerPolicy="no-referrer"
                 />
                 
@@ -277,11 +278,14 @@ export default function App() {
         {/* 📸 GALERÍA DE PROMOCIONES (DEBAJO DEL HERO) */}
         <section className="py-12 bg-white overflow-hidden">
           <div className="max-w-6xl mx-auto px-6 md:px-12 lg:px-16 mb-8">
-            <div className="text-center">
-              <h2 className="font-headline text-2xl md:text-3xl font-extrabold text-text-main tracking-tight uppercase">
+            <div className="text-center max-w-2xl mx-auto">
+              <h2 className="font-headline text-2xl md:text-4xl font-black text-text-main tracking-tight uppercase text-pretty">
                 Descubre nuestras Promociones
               </h2>
-              <div className="w-12 h-1 bg-primary rounded-full mt-2 mx-auto" />
+              <div className="w-16 h-1 bg-primary rounded-full mt-3 mb-4 mx-auto" />
+              <p className="text-sm md:text-base text-text-sec font-medium text-pretty">
+                Aprovecha nuestras ofertas exclusivas diseñadas para cuidar tu visión con el mejor estilo y tecnología.
+              </p>
             </div>
           </div>
           
@@ -1040,17 +1044,17 @@ export default function App() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.7 }}
-                className="lg:col-span-7 flex flex-col items-start"
+                className="lg:col-span-7 flex flex-col items-start text-left"
               >
 
                 
                 {/* Featured phrase */}
-                <h2 className="font-headline text-3.5xl sm:text-4.5xl lg:text-5.5xl font-black tracking-tight leading-[1.08] mb-6">
+                <h2 className="font-headline text-3.5xl sm:text-4.5xl lg:text-5.5xl font-black tracking-tight leading-[1.08] mb-6 text-pretty">
                   “Cuidar de tu salud visual es nuestra prioridad.”
                 </h2>
                 
                 {/* Supporting Text */}
-                <p className="text-xs sm:text-sm text-stone-200 font-medium leading-relaxed max-w-xl">
+                <p className="text-sm md:text-base text-stone-200 font-medium leading-relaxed max-w-xl text-pretty">
                   Nos esforzamos día a día para ofrecerte lentes de la mejor calidad. Seleccionamos cuidadosamente cada polímero, bisagra y luna bajo rigurosas certificaciones para entregarte un producto que transforme de verdad tu confort digital.
                 </p>
               </motion.div>
@@ -1095,15 +1099,15 @@ export default function App() {
               >
                 <div className="flex items-center gap-2 text-primary mb-4">
                   <ShieldAlert className="w-5 h-5 shrink-0 text-primary" />
-                  <span className="text-[10px] font-black uppercase tracking-widest">Alerta de Salud Pública Mundial</span>
+                  <span className="text-[11px] font-black uppercase tracking-widest">Alerta de Salud Pública</span>
                 </div>
                 
                 {/* Message in full uppercase exactly as provided */}
-                <h3 className="font-headline text-xl sm:text-2xl md:text-3xl font-black text-text-main tracking-tight leading-tight uppercase mb-6 text-pretty">
+                <h3 className="font-headline text-xl sm:text-2xl md:text-4xl font-black text-text-main tracking-tight leading-tight uppercase mb-6 text-pretty">
                   EL 80% DE LOS CASOS DE CEGUERA SON PREVENIBLES SI REALIZAS UN EXAMEN VISUAL PARA UNA DETECCIÓN TEMPRANA.
                 </h3>
                 
-                <p className="text-sm md:text-base text-text-sec leading-relaxed max-w-xl mb-8 font-semibold text-pretty">
+                <p className="text-sm md:text-lg text-text-sec leading-relaxed max-w-xl mb-8 font-medium text-pretty">
                   Afecciones silenciosas como el glaucoma, astigmatismo avanzado o el desgaste macular no presentan síntomas notables en fases iniciales. Una valoración anual a tiempo salva tu visión.
                 </p>
 
@@ -1400,7 +1404,7 @@ export default function App() {
         </div>
 
         {/* Bottom copyright legal footer */}
-        <div className="max-w-6xl mx-auto px-6 md:px-12 lg:px-16 border-t border-neutral-900 pt-8 flex flex-col sm:flex-row justify-between items-center gap-4 text-[11px] text-stone-500 font-bold">
+        <div className="max-w-6xl mx-auto px-6 md:px-12 lg:px-16 border-t border-neutral-900 pt-8 flex flex-col sm:flex-row justify-between items-center gap-4 text-[11px] text-stone-500 font-bold text-pretty text-center sm:text-left">
           <p>© 2026 Happy View Optics. Todos los derechos reservados. Monturas 100% Reales.</p>
           <div className="flex gap-4">
             <a href="#" className="hover:underline">Términos y Condiciones</a>

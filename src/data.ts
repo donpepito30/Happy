@@ -1,179 +1,123 @@
-import { FrameModel, FrameShape, LensOption, Review } from './types';
+export interface Product {
+  id: string;
+  name: string;
+  description: string;
+  price: number;
+  originalPrice: number;
+  image: string;
+  category: 'economic' | 'premium' | 'sun';
+  tag?: string;
+}
 
-export const FRAME_SHAPES: FrameShape[] = [
+export interface Testimony {
+  id: string;
+  name: string;
+  text: string;
+  stars: number;
+  role?: string;
+  avatar?: string;
+}
+
+export const PRODUCTS: Product[] = [
   {
-    id: 'round',
-    name: 'Retro Round',
-    description: 'Estilo clásico circular de inspiración vintage, suaviza rostros angulares.',
-    icon: 'Orbit'
+    id: '1',
+    name: 'Classic Executive',
+    description: 'Armazón de acetato premium con bisagras reforzadas. Diseño rectangular ideal para rostros redondos u ovalados.',
+    price: 45,
+    originalPrice: 90,
+    image: 'https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&q=80&w=600',
+    category: 'economic',
+    tag: '2X1 Inauguración'
   },
   {
-    id: 'square',
-    name: 'Geometric Square',
-    description: 'Formas rectangulares modernas que añaden estructura y carácter.',
-    icon: 'Square'
+    id: '2',
+    name: 'Aviator Modern',
+    description: 'Estructura metálica ultraligera de alta resistencia. Estilo aviador renovado con terminales suaves.',
+    price: 45,
+    originalPrice: 90,
+    image: 'https://images.unsplash.com/photo-1508296695146-257a814070b4?auto=format&fit=crop&q=80&w=600',
+    category: 'economic',
+    tag: '2X1 Popular'
   },
   {
-    id: 'clubmaster',
-    name: 'Clubmaster Icon',
-    description: 'Montura mixta clásica con parte superior reforzada para un aire intelectual.',
-    icon: 'Glasses'
+    id: '3',
+    name: 'Cat-Eye Elegance',
+    description: 'Diseño retro moderno que resalta las facciones. Polímero de alta densidad resistente a impactos cotidianos.',
+    price: 45,
+    originalPrice: 90,
+    image: 'https://images.unsplash.com/photo-1511556532299-8f662fc26c06?auto=format&fit=crop&q=80&w=600',
+    category: 'economic',
+    tag: '2X1 Tendencia'
   },
   {
-    id: 'aviator',
-    name: 'Aviator Premium',
-    description: 'La silueta atemporal con doble puente, moderna y audaz.',
-    icon: 'Sliders'
+    id: '4',
+    name: 'Titanium Minimalist',
+    description: 'Aleación de titanio flexible y memory-metal. Máximo confort sin puntos de presión en la nariz.',
+    price: 65,
+    originalPrice: 130,
+    image: 'https://images.unsplash.com/photo-1574258495973-f010dfbb5371?auto=format&fit=crop&q=80&w=600',
+    category: 'premium',
+    tag: 'Alta Gama 2X1'
+  },
+  {
+    id: '5',
+    name: 'Urban Acetate Hex',
+    description: 'Forma geométrica hexagonal vanguardista. Combinación de colores carey y detalles dorados sutiles.',
+    price: 65,
+    originalPrice: 130,
+    image: 'https://images.unsplash.com/photo-1509695507497-903c140c43b0?auto=format&fit=crop&q=80&w=600',
+    category: 'premium',
+    tag: 'Exclusivo 2X1'
+  },
+  {
+    id: '6',
+    name: 'Polarized Explorer',
+    description: 'Lunas polarizadas con protección UV400 total. Filtro de alta definición para conducción y exteriores.',
+    price: 55,
+    originalPrice: 110,
+    image: 'https://images.unsplash.com/photo-1572635196237-14b3f281503f?auto=format&fit=crop&q=80&w=600',
+    category: 'sun',
+    tag: 'Sol 2X1'
   }
 ];
 
-export const LENS_OPTIONS: LensOption[] = [
+export const TESTIMONIALS: Testimony[] = [
   {
-    id: 'clear',
-    name: 'BlueBlock Clear',
-    description: 'Filtrado del 98% de luz azul dañina con lente transparente cristalina. Ideal para diario.',
-    priceModifier: 0
+    id: '1',
+    name: 'María Fernanda C.',
+    text: 'Excelente atención en el local de la Alborada. Aproveché la promoción 2X1 y me entregaron mis dos lentes con la medida exacta. Súper recomendados.',
+    stars: 5,
+    role: 'Cliente Satisfecha',
+    avatar: 'https://i.pravatar.cc/150?u=maria'
   },
   {
-    id: 'tint',
-    name: 'BlueBlock Sun Tint',
-    description: 'Lente ligeramente ahumada o ámbar para exteriores y pantallas con alto contraste.',
-    priceModifier: 5
+    id: '2',
+    name: 'Carlos Enrique J.',
+    text: 'Muy buena experiencia en Los Ceibos. Los lentes BlueBlock realmente descansan la vista después de horas en la oficina. La calidad del armazón es superior.',
+    stars: 5,
+    role: 'Usuario BlueBlock',
+    avatar: 'https://i.pravatar.cc/150?u=carlos'
   },
   {
-    id: 'prescription',
-    name: 'BlueBlock Recetado',
-    description: 'Protección con graduación personalizada (puedes adjuntar tu receta al comprar).',
-    priceModifier: 15
+    id: '3',
+    name: 'Ana Lucía P.',
+    text: 'Me encantaron mis nuevos Cat-Eye. El diseño es moderno y ligero. Es la primera vez que encuentro una óptica en Urdesa con tanta variedad y buen precio.',
+    stars: 5,
+    role: 'Diseñadora Digital',
+    avatar: 'https://i.pravatar.cc/150?u=ana'
+  },
+  {
+    id: '4',
+    name: 'Roberto V.',
+    text: 'Compré las gafas polarizadas para manejar y son excelentes. El trato en el local de Samborondón fue impecable. Recomiendo el combo 2X1 sin dudarlo.',
+    stars: 5,
+    role: 'Empresario',
+    avatar: 'https://i.pravatar.cc/150?u=roberto'
   }
 ];
 
-export const FRAME_MODELS: FrameModel[] = [
-  {
-    id: 'model-tortoise',
-    name: 'Tortoise Vintage',
-    description: 'Nuestra montura estrella con patrón carey vintage clásico. Lentes de acetato de alta densidad pulidos a mano para brindar distinción y confort.',
-    basePrice: 35,
-    shapes: ['round', 'clubmaster', 'square'],
-    colors: [
-      { name: 'Carey Clásico', hex: '#633c16', class: 'bg-amber-900 border-amber-950' },
-      { name: 'Miel Dorado', hex: '#d97706', class: 'bg-amber-600 border-amber-700' },
-      { name: 'Café Espresso', hex: '#271b13', class: 'bg-stone-900 border-stone-950' }
-    ],
-    image: 'https://i.ibb.co/67cqgcsh/FB-IMG-1783531796390.jpg',
-    rating: 4.9,
-    reviewsCount: 184,
-    material: 'Acetato Biodegradable',
-    featured: true
-  },
-  {
-    id: 'model-clear',
-    name: 'Clear Crystal',
-    description: 'El clásico transparente contemporáneo de Happy View. Una montura translúcida ultraligera y fresca que resalta sutilmente las facciones.',
-    basePrice: 35,
-    shapes: ['round', 'square'],
-    colors: [
-      { name: 'Rosa Cuarzo', hex: '#fbcfe8', class: 'bg-pink-100 border-pink-300' },
-      { name: 'Gris Bruma', hex: '#cbd5e1', class: 'bg-blue-100/50 border-blue-200' }
-    ],
-    image: 'https://i.ibb.co/dwJMNH0B/FB-IMG-1783531791193.jpg',
-    rating: 4.8,
-    reviewsCount: 142,
-    material: 'TR90 Aeroespacial',
-    featured: true
-  },
-  {
-    id: 'model-obsidian',
-    name: 'Obsidian Modern',
-    description: 'Gafas de diseño audaz y sobrio en color negro profundo y acabados premium. Perfectas para profesionales digitales de alto rendimiento.',
-    basePrice: 35,
-    shapes: ['square', 'aviator', 'clubmaster'],
-    colors: [
-      { name: 'Negro Mate', hex: '#1c1b1b', class: 'bg-neutral-900 border-black' },
-      { name: 'Gris Grafito', hex: '#4b5563', class: 'bg-gray-600 border-gray-700' },
-      { name: 'Azul Abismo', hex: '#1e3a8a', class: 'bg-blue-900 border-blue-950' }
-    ],
-    image: 'https://i.ibb.co/20BQ6SRs/FB-IMG-1783531786216.jpg',
-    rating: 4.9,
-    reviewsCount: 96,
-    material: 'Polímero TR90 Resistente',
-    featured: false
-  },
-  {
-    id: 'model-titanium',
-    name: 'Titanium Slim',
-    description: 'Estructura esbelta, liviana y flexible con aleaciones seleccionadas de alta gama. Una silueta elegante que no pesa nada en el rostro.',
-    basePrice: 40,
-    shapes: ['aviator', 'round'],
-    colors: [
-      { name: 'Oro Pulido', hex: '#d97706', class: 'bg-yellow-600 border-yellow-700' },
-      { name: 'Plata Satinado', hex: '#9ca3af', class: 'bg-stone-400 border-stone-500' },
-      { name: 'Oro Rosa', hex: '#fda4af', class: 'bg-rose-300 border-rose-400' }
-    ],
-    image: 'https://i.ibb.co/wN5kX7wF/FB-IMG-1783531782155.jpg',
-    rating: 5.0,
-    reviewsCount: 55,
-    material: 'Aleación de Titanio & Acero',
-    featured: false
-  }
-];
-
-export const CUSTOMER_REVIEWS: Review[] = [
-  {
-    id: 'rev-1',
-    author: 'Sofía Martínez',
-    location: 'Madrid, ES',
-    rating: 5,
-    text: 'Pasaba más de 10 horas frente a las pantallas y mis ojos terminaban secos y con ardor todos los días. Desde que compré mis Tortoise con BlueBlock, los dolores de cabeza desaparecieron por completo. ¡Y el diseño es precioso!',
-    date: 'Hace 3 días',
-    frameStyle: 'Tortoise Vintage - Retro Round',
-    verified: true
-  },
-  {
-    id: 'rev-2',
-    author: 'Alejandro Ruiz',
-    location: 'Barcelona, ES',
-    rating: 5,
-    text: 'Aproveché la oferta combo de 2 por $60. Pedí uno transparente y uno Obsidian. La calidad de los materiales se siente de óptica de lujo. El envío fue súper rápido y llegaron en fundas hermosas. Totalmente recomendado.',
-    date: 'Hace 1 semana',
-    frameStyle: 'Obsidian Modern + Clear Crystal',
-    verified: true
-  },
-  {
-    id: 'rev-3',
-    author: 'Valentina Castro',
-    location: 'Santiago, CL',
-    rating: 4.8,
-    text: 'Suelo jugar videojuegos de noche y me costaba mucho conciliar el sueño. Con estos lentes noto la vista mucho más descansada y logro dormir mucho más rápido. Un 10 de 10 en diseño y protección.',
-    date: 'Hace 2 semanas',
-    frameStyle: 'Clear Crystal - Rosa Cuarzo',
-    verified: true
-  }
-];
-
-export const SIMULATION_SCENARIOS = [
-  {
-    id: 'gaming',
-    name: 'Sesión de Gaming Nocturna',
-    description: 'Monitores de alta tasa de refresco emitiendo luz azul concentrada en un entorno oscuro.',
-    originalBg: 'bg-neutral-950 border border-neutral-800',
-    blueLightLevel: 95,
-    imagePlaceholder: '🎮'
-  },
-  {
-    id: 'office',
-    name: 'Trabajo Remoto con Hojas de Cálculo',
-    description: 'Pantallas blancas brillantes con texto pequeño bajo luz de oficina fluorescente.',
-    originalBg: 'bg-neutral-900 border border-neutral-800',
-    blueLightLevel: 80,
-    imagePlaceholder: '💻'
-  },
-  {
-    id: 'scrolling',
-    name: 'Redes Sociales antes de Dormir',
-    description: 'Pantalla del smartphone muy cerca del rostro en la cama, afectando la melatonina.',
-    originalBg: 'bg-neutral-950 border border-neutral-800',
-    blueLightLevel: 90,
-    imagePlaceholder: '📱'
-  }
-];
+// Legacy exports to satisfy unused components during transition
+export const FRAME_MODELS: any[] = [];
+export const FRAME_SHAPES: any[] = [];
+export const LENS_OPTIONS: any[] = [];
+export const SIMULATION_SCENARIOS: any[] = [];
