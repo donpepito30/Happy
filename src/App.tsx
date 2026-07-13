@@ -125,8 +125,8 @@ export default function App() {
     <div className="min-h-screen bg-transparent text-text-main font-sans antialiased selection:bg-primary/10 selection:text-primary">
       
       {/* ================= HEADER (DO NOT TOUCH STRUCTURAL MARKERS) ================= */}
-      <nav className="sticky top-0 w-full z-40 bg-white/40 backdrop-blur-md border-b border-border-neutral/20 shadow-sm">
-        <div className="flex justify-between items-center px-6 md:px-12 lg:px-16 py-4 max-w-6xl mx-auto">
+      <nav className="sticky top-0 w-full z-40 bg-white/20 backdrop-blur-xl border-b border-white/10 shadow-2xl">
+        <div className="flex justify-between items-center px-6 md:px-12 lg:px-16 py-4 max-w-7xl mx-auto">
           <motion.div 
             initial={{ opacity: 0, scale: 0.85, y: -10, rotate: 0 }}
             animate={{ 
@@ -276,30 +276,30 @@ export default function App() {
 
 
         {/* 📸 GALERÍA DE PROMOCIONES (DEBAJO DEL HERO) */}
-        <section className="py-12 bg-white overflow-hidden">
-          <div className="max-w-6xl mx-auto px-6 md:px-12 lg:px-16 mb-8">
+        <section className="py-12 bg-transparent overflow-hidden relative">
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-primary/5 rounded-full blur-[120px] pointer-events-none" />
+          <div className="max-w-6xl mx-auto px-6 md:px-12 lg:px-16 mb-12 relative z-10">
             <div className="text-center max-w-2xl mx-auto">
-              <h2 className="font-headline text-2xl md:text-4xl font-black text-text-main tracking-tight uppercase text-pretty">
-                Descubre nuestras Promociones
+              <h2 className="font-headline text-3xl md:text-5xl font-black text-text-main tracking-tight uppercase text-pretty mb-4">
+                Promociones <span className="text-primary">Exclusivas</span>
               </h2>
-              <div className="w-16 h-1 bg-primary rounded-full mt-3 mb-4 mx-auto" />
-              <p className="text-sm md:text-base text-text-sec font-medium text-pretty">
-                Aprovecha nuestras ofertas exclusivas diseñadas para cuidar tu visión con el mejor estilo y tecnología.
+              <div className="w-20 h-1.5 bg-gradient-to-r from-primary to-secondary rounded-full mx-auto" />
+              <p className="text-base md:text-lg text-text-sec font-medium text-pretty mt-6">
+                Aprovecha nuestras ofertas diseñadas para cuidar tu visión con el mejor estilo y tecnología de punta.
               </p>
             </div>
           </div>
           
-          <div className="flex gap-4 overflow-x-auto pb-8 snap-x snap-mandatory scrollbar-hide px-6 md:px-12 lg:px-16">
+          <div className="flex gap-6 overflow-x-auto pb-12 snap-x snap-mandatory scrollbar-hide px-6 md:px-12 lg:px-16 relative z-10">
             {galleryImages.map((img, idx) => (
               <motion.div 
                 key={idx}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0, scale: 0.9, y: 30 }}
+                whileInView={{ opacity: 1, scale: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: idx * 0.05 }}
-                whileHover={{ y: -5 }}
+                transition={{ delay: idx * 0.08, type: "spring", stiffness: 100 }}
                 onClick={() => setSelectedImage(img)}
-                className="min-w-[280px] sm:min-w-[400px] h-[350px] sm:h-[450px] rounded-2xl overflow-hidden bg-stone-50 border border-border-neutral/20 shadow-md snap-center shrink-0 flex items-center justify-center p-2 relative group cursor-zoom-in"
+                className="min-w-[280px] sm:min-w-[400px] h-[350px] sm:h-[450px] rounded-[2.5rem] overflow-hidden bg-white/20 backdrop-blur-md border border-white/40 shadow-2xl snap-center shrink-0 flex items-center justify-center p-3 relative group cursor-zoom-in transition-all hover:bg-white/40"
               >
                 <img 
                   src={img} 
@@ -378,15 +378,15 @@ export default function App() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.4 }}
-                    whileHover={{ y: -5, backgroundColor: "rgba(255, 255, 255, 0.9)" }}
-                    className="flex flex-col items-center text-center gap-4 p-6 rounded-2xl bg-white/60 backdrop-blur-sm border border-border-neutral/30 shadow-2xs hover:shadow-sm transition-all cursor-default"
+                    whileHover={{ y: -5, backgroundColor: "rgba(255, 255, 255, 0.4)", borderColor: "rgba(255, 255, 255, 0.6)" }}
+                    className="flex flex-col items-center text-center gap-4 p-6 rounded-3xl bg-white/30 backdrop-blur-lg border border-white/40 shadow-xl hover:shadow-2xl transition-all cursor-default"
                   >
-                    <div className="w-10 h-10 rounded-full bg-primary/10 text-primary flex items-center justify-center shrink-0">
+                    <div className="w-12 h-12 rounded-full bg-primary/20 text-primary flex items-center justify-center shrink-0 shadow-inner">
                       <CheckCircle className="w-6 h-6" />
                     </div>
                     <div>
-                      <h4 className="font-bold text-sm text-text-main uppercase tracking-wide mb-2">Dos graduaciones</h4>
-                      <p className="text-xs text-text-sec leading-relaxed text-pretty">Una zona para visión cercana y otra zona superior para visión lejana.</p>
+                      <h4 className="font-bold text-base text-text-main uppercase tracking-wide mb-2">Dos graduaciones</h4>
+                      <p className="text-sm text-text-sec leading-relaxed text-pretty">Una zona para visión cercana y otra zona superior para visión lejana.</p>
                     </div>
                   </motion.li>
 
@@ -395,15 +395,15 @@ export default function App() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.4, delay: 0.1 }}
-                    whileHover={{ y: -5, backgroundColor: "rgba(255, 255, 255, 0.9)" }}
-                    className="flex flex-col items-center text-center gap-4 p-6 rounded-2xl bg-white/60 backdrop-blur-sm border border-border-neutral/30 shadow-2xs hover:shadow-sm transition-all cursor-default"
+                    whileHover={{ y: -5, backgroundColor: "rgba(255, 255, 255, 0.4)", borderColor: "rgba(255, 255, 255, 0.6)" }}
+                    className="flex flex-col items-center text-center gap-4 p-6 rounded-3xl bg-white/30 backdrop-blur-lg border border-white/40 shadow-xl hover:shadow-2xl transition-all cursor-default"
                   >
-                    <div className="w-10 h-10 rounded-full bg-primary/10 text-primary flex items-center justify-center shrink-0">
+                    <div className="w-12 h-12 rounded-full bg-primary/20 text-primary flex items-center justify-center shrink-0 shadow-inner">
                       <CheckCircle className="w-6 h-6" />
                     </div>
                     <div>
-                      <h4 className="font-bold text-sm text-text-main uppercase tracking-wide mb-2">Línea visible integrada</h4>
-                      <p className="text-xs text-text-sec leading-relaxed text-pretty">Delimitación física nítida que separa ambas zonas de enfoque para evitar saltos de imagen.</p>
+                      <h4 className="font-bold text-base text-text-main uppercase tracking-wide mb-2">Línea visible integrada</h4>
+                      <p className="text-sm text-text-sec leading-relaxed text-pretty">Delimitación física nítida que separa ambas zonas de enfoque para evitar saltos de imagen.</p>
                     </div>
                   </motion.li>
 
@@ -412,44 +412,48 @@ export default function App() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.4, delay: 0.2 }}
-                    whileHover={{ y: -5, backgroundColor: "rgba(255, 255, 255, 0.9)" }}
-                    className="flex flex-col items-center text-center gap-4 p-6 rounded-2xl bg-white/60 backdrop-blur-sm border border-border-neutral/30 shadow-2xs hover:shadow-sm transition-all cursor-default"
+                    whileHover={{ y: -5, backgroundColor: "rgba(255, 255, 255, 0.4)", borderColor: "rgba(255, 255, 255, 0.6)" }}
+                    className="flex flex-col items-center text-center gap-4 p-6 rounded-3xl bg-white/30 backdrop-blur-lg border border-white/40 shadow-xl hover:shadow-2xl transition-all cursor-default"
                   >
-                    <div className="w-10 h-10 rounded-full bg-primary/10 text-primary flex items-center justify-center shrink-0">
+                    <div className="w-12 h-12 rounded-full bg-primary/20 text-primary flex items-center justify-center shrink-0 shadow-inner">
                       <CheckCircle className="w-6 h-6" />
                     </div>
                     <div>
-                      <h4 className="font-bold text-sm text-text-main uppercase tracking-wide mb-2">Ideal para personas con presbicia</h4>
-                      <p className="text-xs text-text-sec leading-relaxed text-pretty">La solución más confortable para quienes necesitan corregir tanto la lectura manual como la distancia.</p>
+                      <h4 className="font-bold text-base text-text-main uppercase tracking-wide mb-2">Ideal para personas con presbicia</h4>
+                      <p className="text-sm text-text-sec leading-relaxed text-pretty">La solución más confortable para quienes necesitan corregir tanto la lectura manual como la distancia.</p>
                     </div>
                   </motion.li>
                 </ul>
               </div>
 
             </div>
-
           </div>
         </section>
 
-
         {/* 📦 3. SECCIÓN INFORMATIVA: LENTES FOTOCROMÁTICOS */}
-        <section className="py-24 bg-transparent border-b border-border-neutral/10">
-          <div className="max-w-6xl mx-auto px-6 md:px-12 lg:px-16">
+        <section className="py-24 bg-transparent border-b border-white/10 relative overflow-hidden">
+          <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-16 relative z-10">
             
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-center">
               
               {/* Left Column - Structured text & custom list */}
               <div className="lg:col-span-6 lg:order-1 order-2">
-
                 
-                <h2 className="font-headline text-3xl md:text-4xl lg:text-5xl font-extrabold text-text-main tracking-tight mb-6 leading-tight">
-                  BENEFICIOS DE USAR <br />
-                  <span className="text-secondary">LENTES FOTOCROMÁTICOS</span>
-                </h2>
-                
-                <p className="text-sm text-text-sec font-medium leading-relaxed mb-8">
-                  Las lunas inteligentes reaccionan dinámicamente a la intensidad de la luz solar directa. Pasan de ser transparentes en interiores a oscuras en exteriores en segundos.
-                </p>
+                <motion.div
+                  initial={{ opacity: 0, x: -40 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.7 }}
+                >
+                  <h2 className="font-headline text-3xl md:text-5xl lg:text-6xl font-extrabold text-text-main tracking-tight mb-8 leading-[1.1]">
+                    BENEFICIOS DE USAR <br />
+                    <span className="text-secondary bg-clip-text text-transparent bg-gradient-to-r from-secondary to-primary-dark">LENTES FOTOCROMÁTICOS</span>
+                  </h2>
+                  
+                  <p className="text-base md:text-lg text-text-sec font-medium leading-relaxed mb-10 text-pretty">
+                    La tecnología inteligente que se adapta a tu estilo de vida. Lunas que aclaran en interiores y oscurecen al contacto con los rayos UV del sol, garantizando una transición cómoda y estética en todo momento.
+                  </p>
+                </motion.div>
 
                 {/* Grid of high-end feature micro-cards */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-5">
@@ -534,8 +538,9 @@ export default function App() {
 
 
         {/* 📦 4. SECCIÓN INFORMATIVA: PROTECCIÓN DE LUZ AZUL */}
-        <section className="py-24 bg-transparent border-b border-border-neutral/10">
-          <div className="max-w-6xl mx-auto px-6 md:px-12 lg:px-16">
+        <section className="py-24 bg-transparent border-b border-white/10 relative overflow-hidden">
+          <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[120px] pointer-events-none" />
+          <div className="max-w-6xl mx-auto px-6 md:px-12 lg:px-16 relative z-10">
             
             {/* Header Title & Slogan */}
             <div className="text-center max-w-2xl mx-auto mb-16 flex flex-col items-center">
@@ -1257,67 +1262,67 @@ export default function App() {
                     </div>
                   </motion.div>
                 ) : (
-                  <form onSubmit={handleBookingSubmit} className="bg-white/70 backdrop-blur-xl p-6 rounded-3xl border border-border-neutral/40 shadow-sm space-y-4">
+                  <form onSubmit={handleBookingSubmit} className="bg-white/30 backdrop-blur-2xl p-6 sm:p-10 rounded-[2.5rem] border border-white/40 shadow-2xl space-y-6">
                     
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                       {/* Name input */}
                       <div>
-                        <label className="block text-[10px] uppercase font-black tracking-wider text-text-sec mb-1.5">Nombre Completo:</label>
-                        <div className="relative">
-                          <User className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-stone-400" />
+                        <label className="block text-[11px] uppercase font-black tracking-widest text-text-sec mb-2 ml-1">Nombre Completo:</label>
+                        <div className="relative group">
+                          <User className="absolute left-4 top-1/2 -translate-y-1/2 w-4.5 h-4.5 text-stone-400 group-focus-within:text-primary transition-colors" />
                           <input 
                             type="text" 
                             required
                             placeholder="Ej. Juan Pérez" 
                             value={bookingName}
                             onChange={(e) => setBookingName(e.target.value)}
-                            className="w-full bg-white/40 backdrop-blur-sm border border-border-neutral rounded-xl py-2.5 pl-10 pr-4 text-xs text-text-main focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors"
+                            className="w-full bg-white/40 backdrop-blur-md border border-white/30 rounded-2xl py-3.5 pl-12 pr-4 text-sm text-text-main focus:outline-none focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all placeholder:text-stone-300"
                           />
                         </div>
                       </div>
 
                       {/* Phone input */}
                       <div>
-                        <label className="block text-[10px] uppercase font-black tracking-wider text-text-sec mb-1.5">Teléfono Celular:</label>
-                        <div className="relative">
-                          <Phone className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-stone-400" />
+                        <label className="block text-[11px] uppercase font-black tracking-widest text-text-sec mb-2 ml-1">Teléfono Celular:</label>
+                        <div className="relative group">
+                          <Phone className="absolute left-4 top-1/2 -translate-y-1/2 w-4.5 h-4.5 text-stone-400 group-focus-within:text-primary transition-colors" />
                           <input 
                             type="tel" 
                             required
                             placeholder="Ej. 0991234567" 
                             value={bookingPhone}
                             onChange={(e) => setBookingPhone(e.target.value)}
-                            className="w-full bg-white/40 backdrop-blur-sm border border-border-neutral rounded-xl py-2.5 pl-10 pr-4 text-xs text-text-main focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors"
+                            className="w-full bg-white/40 backdrop-blur-md border border-white/30 rounded-2xl py-3.5 pl-12 pr-4 text-sm text-text-main focus:outline-none focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all placeholder:text-stone-300"
                           />
                         </div>
                       </div>
                     </div>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                       {/* Date input */}
                       <div>
-                        <label className="block text-[10px] uppercase font-black tracking-wider text-text-sec mb-1.5">Fecha de Visita:</label>
-                        <div className="relative">
-                          <Calendar className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-stone-400" />
+                        <label className="block text-[11px] uppercase font-black tracking-widest text-text-sec mb-2 ml-1">Fecha de Visita:</label>
+                        <div className="relative group">
+                          <Calendar className="absolute left-4 top-1/2 -translate-y-1/2 w-4.5 h-4.5 text-stone-400 group-focus-within:text-primary transition-colors" />
                           <input 
                             type="date" 
                             required
                             value={bookingDate}
                             onChange={(e) => setBookingDate(e.target.value)}
-                            className="w-full bg-white/40 backdrop-blur-sm border border-border-neutral rounded-xl py-2.5 pl-10 pr-4 text-xs text-text-main focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors"
+                            className="w-full bg-white/40 backdrop-blur-md border border-white/30 rounded-2xl py-3.5 pl-12 pr-4 text-sm text-text-main focus:outline-none focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all"
                           />
                         </div>
                       </div>
 
                       {/* Time Slot input */}
                       <div>
-                        <label className="block text-[10px] uppercase font-black tracking-wider text-text-sec mb-1.5">Rango Horario:</label>
-                        <div className="relative">
-                          <Clock className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-stone-400" />
+                        <label className="block text-[11px] uppercase font-black tracking-widest text-text-sec mb-2 ml-1">Rango Horario:</label>
+                        <div className="relative group">
+                          <Clock className="absolute left-4 top-1/2 -translate-y-1/2 w-4.5 h-4.5 text-stone-400 group-focus-within:text-primary transition-colors" />
                           <select 
                             value={bookingTime}
                             onChange={(e) => setBookingTime(e.target.value)}
-                            className="w-full bg-white/40 backdrop-blur-sm border border-border-neutral rounded-xl py-2.5 pl-10 pr-4 text-xs text-text-main focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors appearance-none cursor-pointer"
+                            className="w-full bg-white/40 backdrop-blur-md border border-white/30 rounded-2xl py-3.5 pl-12 pr-10 text-sm text-text-main focus:outline-none focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all appearance-none cursor-pointer"
                           >
                             <option value="10:00 AM - 12:00 PM">Mañana: 10:00 AM - 12:00 PM</option>
                             <option value="12:00 PM - 02:00 PM">Mediodía: 12:00 PM - 02:00 PM</option>
@@ -1330,10 +1335,10 @@ export default function App() {
 
                     <motion.button
                       type="submit"
-                      whileHover={{ scale: 1.02, y: -2, boxShadow: "0 12px 20px -8px rgba(0, 143, 76, 0.4)" }}
+                      whileHover={{ scale: 1.01, y: -2, boxShadow: "0 20px 40px -10px rgba(0, 143, 76, 0.4)" }}
                       whileTap={{ scale: 0.98 }}
                       transition={{ type: "spring", stiffness: 400, damping: 15 }}
-                      className="w-full bg-primary hover:bg-primary/90 text-white font-black text-xs uppercase tracking-widest py-4 px-6 rounded-xl transition-all shadow-sm cursor-pointer"
+                      className="w-full bg-primary hover:bg-darkgreen text-white font-black text-sm uppercase tracking-widest py-4.5 px-6 rounded-2xl transition-all shadow-xl cursor-pointer mt-2"
                     >
                       Reservar Mi Turno Visual
                     </motion.button>
@@ -1412,6 +1417,14 @@ export default function App() {
           </div>
         </div>
       </footer>
+
+      {/* Background Blobs for Glassmorphism pop */}
+      <div className="fixed inset-0 z-[-1] overflow-hidden pointer-events-none">
+        <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-primary/10 rounded-full blur-[120px] animate-pulse" />
+        <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-secondary/10 rounded-full blur-[120px] animate-pulse" style={{ animationDelay: '1s' }} />
+        <div className="absolute top-[30%] right-[10%] w-[30%] h-[30%] bg-primary/5 rounded-full blur-[100px]" />
+        <div className="absolute bottom-[20%] left-[20%] w-[25%] h-[25%] bg-secondary/5 rounded-full blur-[90px]" />
+      </div>
 
       {/* Floating WhatsApp Button */}
       <motion.a

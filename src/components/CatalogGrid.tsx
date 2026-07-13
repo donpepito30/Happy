@@ -88,7 +88,7 @@ export default function CatalogGrid({ onSelectForCombo }: CatalogGridProps) {
               key={product.id}
               onMouseEnter={() => setHoveredCardId(product.id)}
               onMouseLeave={() => setHoveredCardId(null)}
-              className="bg-white rounded-2xl border border-outline-variant/60 overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group relative"
+              className="bg-white/40 backdrop-blur-md rounded-3xl border border-white/40 overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 flex flex-col group relative"
             >
               {/* Image Container */}
               <div className="relative aspect-[4/3] bg-surface-container-low overflow-hidden flex items-center justify-center p-4">

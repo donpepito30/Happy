@@ -230,10 +230,12 @@ export default function ComboBuilder({
   };
 
   return (
-    <div className="bg-white rounded-[2.5rem] p-6 md:p-8 lg:p-12 border border-outline-variant shadow-md max-w-6xl mx-auto">
+    <div className="bg-white/30 backdrop-blur-2xl rounded-[3rem] p-4 sm:p-6 md:p-10 border border-white/40 shadow-2xl max-w-7xl mx-auto overflow-hidden relative">
+      <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-64 h-64 bg-secondary/5 rounded-full blur-3xl pointer-events-none" />
       
       {/* Combo Builder Header */}
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 border-b border-outline-variant/40 pb-6 mb-8">
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 border-b border-white/20 pb-6 mb-8 relative z-10">
         <div>
           <div className="inline-flex items-center gap-1.5 bg-secondary-container/25 text-secondary px-3.5 py-1 rounded-full text-xs font-bold mb-3">
             <Sparkles className="w-3.5 h-3.5" />
@@ -656,8 +658,8 @@ export default function ComboBuilder({
             <div className="flex flex-col gap-4">
               
               {/* Pair 1 Graphic */}
-              <div className="bg-white rounded-2xl border border-outline-variant/40 p-4.5 flex flex-col items-center relative overflow-hidden group">
-                <div className="absolute top-2.5 left-2.5 bg-primary/10 text-primary text-[9px] font-extrabold uppercase px-2 py-0.5 rounded-full">
+              <div className="bg-white/40 backdrop-blur-md rounded-2xl border border-white/30 p-4.5 flex flex-col items-center relative overflow-hidden group hover:bg-white/50 transition-colors shadow-sm">
+                <div className="absolute top-2.5 left-2.5 bg-primary/20 text-primary-dark text-[9px] font-black uppercase px-2.5 py-1 rounded-full shadow-inner">
                   Gafa #1
                 </div>
                 
@@ -675,8 +677,8 @@ export default function ComboBuilder({
               </div>
 
               {/* Pair 2 Graphic */}
-              <div className="bg-white rounded-2xl border border-outline-variant/40 p-4.5 flex flex-col items-center relative overflow-hidden group">
-                <div className="absolute top-2.5 left-2.5 bg-secondary/10 text-secondary text-[9px] font-extrabold uppercase px-2 py-0.5 rounded-full">
+              <div className="bg-white/40 backdrop-blur-md rounded-2xl border border-white/30 p-4.5 flex flex-col items-center relative overflow-hidden group hover:bg-white/50 transition-colors shadow-sm">
+                <div className="absolute top-2.5 left-2.5 bg-secondary/20 text-secondary text-[9px] font-black uppercase px-2.5 py-1 rounded-full shadow-inner">
                   Gafa #2
                 </div>
 
